@@ -206,7 +206,7 @@ export const ObsidianFlavoredMarkdown: QuartzTransformerPlugin<Partial<Options> 
                     let [width, height] = dims.split("x", 2)
                     width ||= "auto"
                     height ||= "auto"
-                    if (url.endsWith("-dark.png") || url.endsWith("-ligth.png")) {
+                    if (url.endsWith("-dark.png") || url.endsWith("-light.png")) {
                       return {
                         type: "html",
                         value: `<picture>
