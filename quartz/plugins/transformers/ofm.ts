@@ -210,9 +210,9 @@ export const ObsidianFlavoredMarkdown: QuartzTransformerPlugin<Partial<Options> 
                       return {
                         type: "html",
                         value: `<picture>
-                        <source srcset="${url.endsWith("-dark.png") ? url : url.replace("-light", "-dark")}" media="#" class="dark-img">
-                        <source srcset="${url.endsWith("-light.png") ? url : url.replace("-dark", "-light")}" media="#" class="light-img">
-                        <img src="#">
+                        <source srcSet="${url.endsWith("-dark.png") ? url : url.replace("-light", "-dark")}" media="#" class="dark-img">
+                        <source srcSet="${url.endsWith("-light.png") ? url : url.replace("-dark", "-light")}" media="#" class="light-img">
+                        <img src="${url}">
                     </picture>`
                       }
                     }

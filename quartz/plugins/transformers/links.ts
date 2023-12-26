@@ -107,11 +107,11 @@ export const CrawlLinks: QuartzTransformerPlugin<Partial<Options> | undefined> =
 
               // transform all other resources that may use links
               if (
-                ["img", "video", "audio", "iframe"].includes(node.tagName) &&
+                ["img", "video", "audio", "iframe", "source"].includes(node.tagName) &&
                 node.properties &&
-                typeof node.properties.src === "string"
+                (typeof node.properties.src === "string" || typeof node.properties.srcSet === "string")
               ) {
-                if (!isAbsoluteUrl(node.properties.src)) {
+                if (node.properties.src !== undefined && !isAbsoluteUrl(node.properties.src)) {
                   let dest = node.properties.src as RelativeURL
                   dest = node.properties.src = transformLink(
                     file.data.slug!,
@@ -119,6 +119,14 @@ export const CrawlLinks: QuartzTransformerPlugin<Partial<Options> | undefined> =
                     transformOptions,
                   )
                   node.properties.src = dest
+                } else if (node.properties.srcSet !== undefined && !isAbsoluteUrl(node.properties.srcSet)) {
+                  let dest = node.properties.srcSet as RelativeURL
+                  dest = node.properties.srcSet = transformLink(
+                    file.data.slug!,
+                    dest,
+                    transformOptions,
+                  )
+                  node.properties.srcSet = dest
                 }
               }
             })
