@@ -2,6 +2,20 @@ const userPref = window.matchMedia("(prefers-color-scheme: light)").matches ? "l
 const currentTheme = localStorage.getItem("theme") ?? userPref
 document.documentElement.setAttribute("saved-theme", currentTheme)
 
+function setImageSource(theme: boolean) {
+  // theme == true is dark
+  var dark: NodeList = document.querySelectorAll('.dark-img');
+    var light: NodeList = document.querySelectorAll('.light-img');
+    for (var i = 0; i < dark.length; i++){
+      var d = dark[i] as HTMLElement
+      d.setAttribute("media", theme ? "all" : "none")
+    }
+    for (var i = 0; i < dark.length; i++){
+      var l = light[i] as HTMLElement
+      l.setAttribute("media", theme ? "none" : "all")
+    }
+}
+
 document.addEventListener("nav", () => {
   const switchTheme = (e: any) => {
     if (e.target.checked) {
@@ -11,6 +25,8 @@ document.addEventListener("nav", () => {
       document.documentElement.setAttribute("saved-theme", "light")
       localStorage.setItem("theme", "light")
     }
+
+    setImageSource(e.target.checked);
   }
 
   // Darkmode toggle
@@ -19,6 +35,9 @@ document.addEventListener("nav", () => {
   toggleSwitch.addEventListener("change", switchTheme)
   if (currentTheme === "dark") {
     toggleSwitch.checked = true
+    setImageSource(true);
+  } else {
+    setImageSource(false);
   }
 
   // Listen for changes in prefers-color-scheme
