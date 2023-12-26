@@ -2,8 +2,10 @@
 
 This picture changes source depending on theme.
 
-<picture>
-    <source srcset="https://4.img-dpreview.com/files/p/TS600x450~sample_galleries/7359875737/4323139542.jpg" media="#" class="dark-img">
-    <source srcset="https://4.img-dpreview.com/files/p/TS600x450~sample_galleries/9046721848/0070551978.jpg" media="#" class="light-img">
-    <img src="#">
-</picture>
+![[Poverty Trap Diagram-dark.png]]
+
+### How it works?
+
+The [OFM transformer](https://github.com/flyingcakes85/quartz-image-theme/commit/3c442c93ef4113881c91dc0f64f615d115732244) detects whether the image url has a theme ending either `-dark.png` or `-light.png`. If yes, it outputs a `<picture>` element which can react to theme.
+
+The extension `.png` is hardcoded. Will need to do something about it :p
